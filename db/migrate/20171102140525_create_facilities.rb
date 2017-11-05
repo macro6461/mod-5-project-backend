@@ -6,6 +6,7 @@ class CreateFacilities < ActiveRecord::Migration[5.1]
       t.float  :latitude
       t.float  :longitude
       t.string :url
+      t.string :distance, default: nil
 
       t.timestamps
     end

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20171102140525) do
     t.float "latitude"
     t.float "longitude"
     t.string "url"
+    t.string "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,11 +29,15 @@ ActiveRecord::Schema.define(version: 20171102140525) do
   create_table "sponsees", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "bio"
+    t.string "address"
+    t.text "bio"
     t.string "age"
     t.string "gender"
+    t.float "latitude"
+    t.float "longitude"
     t.string "email"
     t.string "role", default: "sponsee"
+    t.string "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,11 +52,15 @@ ActiveRecord::Schema.define(version: 20171102140525) do
   create_table "sponsors", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "bio"
+    t.string "address"
+    t.text "bio"
     t.string "age"
     t.string "gender"
+    t.float "latitude"
+    t.float "longitude"
     t.string "email"
     t.string "role", default: "sponsor"
+    t.string "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

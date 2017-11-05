@@ -10,11 +10,12 @@ class SponseesController < ApplicationController
     end
 
     def create
-      sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email])
+      sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], address: params[:address])
       if sponsee.save
         token = encode_token(sponsee_id: sponsee.id)
         render json: {sponsee: sponsee, jwt: token}
       else
+        render json: {message: "invalid signup"}
       end
     end
 

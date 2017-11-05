@@ -9,7 +9,7 @@ class SponsorsController < ApplicationController
   end
 
   def create
-    sponsor = Sponsor.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email])
+    sponsor = Sponsor.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], address: params[:address])
     if sponsor.save
       token = encode_token(sponsor_id: sponsor.id)
       render json: {sponsor: sponsor, jwt: token}
