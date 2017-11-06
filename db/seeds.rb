@@ -27,6 +27,8 @@ Facility.create(name: "New York Center for Living", address: "226 E 52nd St, New
 
 
 
+
+
 Sponsor.create(username: "PaulG", password: "1234", bio: "Recently sober and looking to extend a helping hand.", age: "35", gender: "male", email: "mattcroak718@gmail.com", address: "606 King Lane, Passaic, NJ 07055")
 Sponsor.create(username: "LucyP", password: "1234", bio: "Being a sponsor would help reinforce my own sobriety.", age: "30", gender: "female", email: "mattcroak718@gmail.com", address: "5 Elizabeth Street, Bay Shore, NY 11706")
 Sponsor.create(username: "CarlB", password: "1234", bio: "If you like Game of Thrones we'll get along great!", age: "26", gender: "male", email: "mattcroak718@gmail.com", address: "938 Rock Maple Court, Brooklyn, NY 11201")
