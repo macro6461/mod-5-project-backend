@@ -5,16 +5,17 @@ class SponseesController < ApplicationController
     # before_action :sponsor_logged_in?, only: [:index]
 
     def index
-      sponsees = Sponsee.all
-      render json: sponsees
+      @sponsees = Sponsee.all
+      render json: @sponsees
     end
 
     def create
-      sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], address: params[:address])
-      if sponsee.save
-        token = encode_token(sponsee_id: sponsee.id)
-        render json: {sponsee: sponsee, jwt: token}
+      @sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], address: params[:address])
+      if @sponsee.save
+        token = encode_token(sponsee_id: @sponsee.id)
+        render json: {sponsee: @sponsee, jwt: token}
       else
+        byebug
         render json: {message: "invalid signup"}
       end
     end

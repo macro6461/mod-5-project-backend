@@ -10,7 +10,7 @@ class SponseeAuthController < ApplicationController
       token = encode_token(sponsee_id: sponsee.id)
       render json: { sponsee: sponsee, jwt: token}
     else
-      redirect_to '/sponsees'
+      render json: {}
     end
   end
 
