@@ -15,7 +15,6 @@ class SponseesController < ApplicationController
         token = encode_token(sponsee_id: @sponsee.id)
         render json: {sponsee: @sponsee, jwt: token}
       else
-        byebug
         render json: {message: "invalid signup"}
       end
     end

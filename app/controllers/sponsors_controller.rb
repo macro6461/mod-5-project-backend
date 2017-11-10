@@ -14,6 +14,7 @@ class SponsorsController < ApplicationController
       token = encode_token(sponsor_id: sponsor.id)
       render json: {sponsor: sponsor, jwt: token}
     else
+      render json: {message: "invalid signup"}
     end
   end
 

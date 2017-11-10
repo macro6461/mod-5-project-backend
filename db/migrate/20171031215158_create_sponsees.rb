@@ -3,7 +3,10 @@ class CreateSponsees < ActiveRecord::Migration[5.1]
     create_table :sponsees do |t|
       t.string :username
       t.string :password_digest
-      t.string :address
+      t.string :street
+      t.string :city
+      t.string :state
+      t.string :zip
       t.text :bio
       t.string :age
       t.string :gender

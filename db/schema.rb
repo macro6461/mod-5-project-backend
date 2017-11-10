@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(version: 20171102140525) do
   create_table "sponsees", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "address"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
     t.text "bio"
     t.string "age"
     t.string "gender"
@@ -52,7 +55,10 @@ ActiveRecord::Schema.define(version: 20171102140525) do
   create_table "sponsors", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "address"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
     t.text "bio"
     t.string "age"
     t.string "gender"
