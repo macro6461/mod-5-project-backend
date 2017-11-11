@@ -10,7 +10,7 @@ class SponseesController < ApplicationController
     end
 
     def create
-      @sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], address: params[:address])
+      @sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip])
       if @sponsee.save
         token = encode_token(sponsee_id: @sponsee.id)
         render json: {sponsee: @sponsee, jwt: token}
