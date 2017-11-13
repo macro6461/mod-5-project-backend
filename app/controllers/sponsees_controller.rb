@@ -9,14 +9,33 @@ class SponseesController < ApplicationController
       render json: @sponsees
     end
 
+    def show
+      @sponsee = Sponsee.find(params[:id])
+      render json: @sponsee
+    end
+
     def create
-      @sponsee = Sponsee.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip])
+      @sponsee = Sponsee.new(sponsee_params)
       if @sponsee.save
         token = encode_token(sponsee_id: @sponsee.id)
         render json: {sponsee: @sponsee, jwt: token}
       else
         render json: {message: "invalid signup"}
       end
+    end
+
+    def update
+      @sponsee = Sponsee.find(params[:id])
+      if @sponsee.update(sponsee_params)
+        render json: @sponsee
+      else
+        render json: @sponsee.errors, status: :unprocessable_entity
+      end
+    end
+
+    def delete
+      @sponsee = Sponsee.find(params[:id])
+      @sponsee.destroy
     end
 
     def me
@@ -26,5 +45,10 @@ class SponseesController < ApplicationController
         render json: { message: "Error - need correct JWT"}
       end
     end
+  private
+
+  def sponsee_params
+    params.require(:sponsee).permit(:username, :age, :bio, :street, :city, :state, :zip, {:role => 'sponsee'}, :password, :gender, :email)
+  end
 
 end

@@ -8,8 +8,13 @@ class SponsorsController < ApplicationController
     render json: @sponsors
   end
 
+  def show
+    @sponsor = Sponsor.find(params[:id])
+    render json: @sponsor
+  end
+
   def create
-    @sponsor = Sponsor.new(username: params[:username], password: params[:password], bio: params[:bio], age: params[:age], gender: params[:gender], email: params[:email], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip])
+    @sponsor = Sponsor.new(sponsor_params)
     if @sponsor.save
       token = encode_token(sponsor_id: @sponsor.id)
       render json: {sponsor: @sponsor, jwt: token}
@@ -18,12 +23,32 @@ class SponsorsController < ApplicationController
     end
   end
 
+  def update
+    @sponsor = Sponsor.find(params[:id])
+    if @sponsor.update(sponsor_params)
+      render json: @sponsor
+    else
+      render json: @sponsor.errors, status: :unprocessable_entity
+    end
+  end
+
+  def delete
+    @sponsor = Sponsor.find(params[:id])
+    @sponsor.destroy
+  end
+
   def me
     if @sponsor
       render json: { sponsor: @sponsor } #later include sponsorsponsee or maybe sponsee
     else
       render json: { message: "Error - need correct JWT"}
     end
+  end
+
+  private
+
+  def sponsor_params
+    params.require(:sponsor).permit(:username, :age, :bio, :street, :city, :state, :zip, {:role => 'sponsee'}, :password, :gender, :email)
   end
 
 end
