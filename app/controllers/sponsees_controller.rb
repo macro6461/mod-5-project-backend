@@ -15,7 +15,7 @@ class SponseesController < ApplicationController
     end
 
     def create
-      @sponsee = Sponsee.new(sponsee_params)
+      @sponsee = Sponsee.new(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
       if @sponsee.save
         token = encode_token(sponsee_id: @sponsee.id)
         render json: {sponsee: @sponsee, jwt: token}
@@ -26,7 +26,7 @@ class SponseesController < ApplicationController
 
     def update
       @sponsee = Sponsee.find(params[:id])
-      if @sponsee.update(sponsee_params)
+      if @sponsee.update(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
         render json: @sponsee
       else
         render json: @sponsee.errors, status: :unprocessable_entity
@@ -45,10 +45,10 @@ class SponseesController < ApplicationController
         render json: { message: "Error - need correct JWT"}
       end
     end
-  private
 
-  def sponsee_params
-    params.require(:sponsee).permit(:username, :age, :bio, :street, :city, :state, :zip, {:role => 'sponsee'}, :password, :gender, :email)
-  end
+
+  # def sponsee_params
+  #   params.require(:sponsee).permit(:username, :age, :bio, :street, :city, :state, :zip, {:role => 'sponsee'}, :password, :gender, :email)
+  # end
 
 end

@@ -14,7 +14,7 @@ class SponsorsController < ApplicationController
   end
 
   def create
-    @sponsor = Sponsor.new(sponsor_params)
+    @sponsor = Sponsor.new(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
     if @sponsor.save
       token = encode_token(sponsor_id: @sponsor.id)
       render json: {sponsor: @sponsor, jwt: token}
@@ -25,7 +25,7 @@ class SponsorsController < ApplicationController
 
   def update
     @sponsor = Sponsor.find(params[:id])
-    if @sponsor.update(sponsor_params)
+    if @sponsor.update(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
       render json: @sponsor
     else
       render json: @sponsor.errors, status: :unprocessable_entity
@@ -45,10 +45,10 @@ class SponsorsController < ApplicationController
     end
   end
 
-  private
-
-  def sponsor_params
-    params.require(:sponsor).permit(:username, :age, :bio, :street, :city, :state, :zip, {:role => 'sponsee'}, :password, :gender, :email)
-  end
+  # private
+  #
+  # def sponsor_params
+  #   params.require(:sponsor).permit(:username, :age, :bio, :street, :city, :state, :zip, :password, :gender, :email)
+  # end
 
 end
