@@ -10,7 +10,7 @@ class SponsorAuthController < ApplicationController
       token = encode_token(sponsor_id: sponsor.id)
       render json: { sponsor: sponsor.username, role: sponsor.role, jwt: token}
     else
-      render json: {message: "invalid login"}
+      render json: {message: "user not found"}
     end
   end
 

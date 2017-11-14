@@ -10,7 +10,7 @@ class SponseeAuthController < ApplicationController
       token = encode_token(sponsee_id: sponsee.id)
       render json: { sponsee: sponsee, jwt: token}
     else
-      render json: {message: "invalid login"}
+      render json: {message: "user not found"}
     end
   end
 

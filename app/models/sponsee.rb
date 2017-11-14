@@ -1,7 +1,7 @@
 class Sponsee < ApplicationRecord
   validates :bio, length: { maximum: 200 }
   validates :username, uniqueness: true
-  validates_email_format_of :email, :message => 'invalid email'
+  validates_email_format_of :email, :message => 'invalid email format'
   has_secure_password
 
   geocoded_by :address
