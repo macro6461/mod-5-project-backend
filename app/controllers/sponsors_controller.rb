@@ -19,7 +19,11 @@ class SponsorsController < ApplicationController
       token = encode_token(sponsor_id: @sponsor.id)
       render json: {sponsor: @sponsor, jwt: token}
     else
-      render json: {error: "username " + @sponsor.errors.messages.first[1][0]}, status: 406
+      if @sponsor.errors.messages.first[1][0] == "has already been taken"
+        render json: {error: "username " + @sponsor.errors.messages.first[1][0]}, status: 406
+      else
+        render json: {error: @sponsor.errors.messages.first[1][0]}, status: 406
+      end
     end
   end
 
@@ -28,7 +32,11 @@ class SponsorsController < ApplicationController
     if @sponsor.update(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
       render json: @sponsor
     else
-      render json: {error: @sponsor.errors}, status: 401
+      if @sponsor.errors.messages.first[1][0] == "has already been taken"
+        render json: {error: "username " + @sponsor.errors.messages.first[1][0]}, status: 406
+      else
+        render json: {error: @sponsor.errors.messages.first[1][0]}, status: 406
+      end
     end
   end
 

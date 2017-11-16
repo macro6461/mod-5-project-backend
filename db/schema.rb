@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20171102140525) do
     t.float "latitude"
     t.float "longitude"
     t.string "url"
+    t.string "phone"
     t.string "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

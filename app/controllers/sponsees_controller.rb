@@ -2,7 +2,7 @@ class SponseesController < ApplicationController
   #{username: "mattman", password: "bandit123"}
 
     # skip_before_action :authorized, only: [:create]
-    # before_action :sponsor_logged_in?, only: [:index]
+    # before_action :sponsee_logged_in?, only: [:index]
 
     def index
       @sponsees = Sponsee.all
@@ -20,16 +20,25 @@ class SponseesController < ApplicationController
         token = encode_token(sponsee_id: @sponsee.id)
         render json: {sponsee: @sponsee, jwt: token}
       else
-        render json: {error: "username " + @sponsee.errors.messages.first[1][0]}, status: 406
+        if @sponsee.errors.messages.first[1][0] == "has already been taken"
+          render json: {error: "username " + @sponsee.errors.messages.first[1][0]}, status: 406
+        else
+          render json: {error: @sponsee.errors.messages.first[1][0]}, status: 406
+        end
       end
     end
 
     def update
+
       @sponsee = Sponsee.find(params[:id])
       if @sponsee.update(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
         render json: @sponsee
       else
-        render json: @sponsee.errors, status: :unprocessable_entity
+        if @sponsee.errors.messages.first[1][0] == "has already been taken"
+          render json: {error: "username " + @sponsee.errors.messages.first[1][0]}, status: 406
+        else
+          render json: {error: @sponsee.errors.messages.first[1][0]}, status: 406
+        end
       end
     end
 
@@ -40,7 +49,7 @@ class SponseesController < ApplicationController
 
     def me
       if @sponsee
-        render json: { sponsee: @sponsee } #later include sponsorsponsee or maybe sponsee
+        render json: { sponsee: @sponsee } #later include sponseesponsee or maybe sponsee
       else
         render json: { message: "Error - need correct JWT"}
       end
