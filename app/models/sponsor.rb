@@ -1,4 +1,5 @@
 class Sponsor < ApplicationRecord
+  has_many :sponsor_reviews
   validates :bio, length: { maximum: 200 }
   validates :username, uniqueness: true
   validates_email_format_of :email, :message => 'invalid email format'

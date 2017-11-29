@@ -15,6 +15,7 @@ class SponseesController < ApplicationController
     end
 
     def create
+      byebug
       @sponsee = Sponsee.new(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
       if @sponsee.save
         token = encode_token(sponsee_id: @sponsee.id)

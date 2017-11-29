@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post '/sponsee/login', to: 'sponsee_auth#create'
   get "/welcome", to: 'application#welcome'
   resources :facilities
+  resources :sponsee_reviews
+  resources :sponsor_reviews
 
 
   # For details on the DSL available within this file, see

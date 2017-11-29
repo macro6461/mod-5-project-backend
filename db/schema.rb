@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102140525) do
+ActiveRecord::Schema.define(version: 20171121190603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20171102140525) do
     t.string "url"
     t.string "phone"
     t.string "distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsee_reviews", force: :cascade do |t|
+    t.integer "sponsee_id"
+    t.integer "facility_id"
+    t.integer "rating"
+    t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,6 +52,15 @@ ActiveRecord::Schema.define(version: 20171102140525) do
     t.string "email"
     t.string "role", default: "sponsee"
     t.string "distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsor_reviews", force: :cascade do |t|
+    t.integer "sponsor_id"
+    t.integer "facility_id"
+    t.integer "rating"
+    t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
