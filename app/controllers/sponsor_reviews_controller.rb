@@ -16,7 +16,7 @@ class SponsorReviewsController < ApplicationController
   end
 
   def create
-    byebug
+    
     @sponsor_review = SponsorReview.new(sponsor_id: params[:sponsor_id], facility_id: params[:facility_id], rating: params[:rating], body: params[:body])
     if @sponsor_review.save
       render json: {sponsor_review: @sponsor_review}

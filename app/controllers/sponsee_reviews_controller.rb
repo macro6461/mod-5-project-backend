@@ -15,7 +15,6 @@ class SponseeReviewsController < ApplicationController
   end
 
   def create
-    byebug
     @sponsee_review = SponseeReview.new(sponsee_id: params[:sponsee_id], facility_id: params[:facility_id], rating: params[:rating], body: params[:body])
     if @sponsee_review.save
       redirect_to @sponsee_review
