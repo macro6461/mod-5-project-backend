@@ -1,5 +1,5 @@
 class Sponsee < ApplicationRecord
-  has_many :sponsee_reviews
+  has_many :sponsee_reviews, dependent: :destroy
   validates :bio, length: { maximum: 200 }
   validates :username, uniqueness: true
   validates_email_format_of :email, :message => 'invalid email format'

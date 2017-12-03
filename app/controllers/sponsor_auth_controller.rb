@@ -4,7 +4,7 @@ class SponsorAuthController < ApplicationController
 # skip_before_action :authorized, only: [:create]
 
   def create
-  
+
     sponsor = Sponsor.find_by(username: params[:username])
     if sponsor && sponsor.authenticate(params[:password])
       #YOU ARE WHO YOU SAY YOU ARE
