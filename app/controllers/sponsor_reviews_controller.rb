@@ -29,6 +29,7 @@ class SponsorReviewsController < ApplicationController
   end
 
   def delete
+    byebug
     @sponsor_review = SponsorReview.find(params[:id])
     @sponsor_review.destroy
   end

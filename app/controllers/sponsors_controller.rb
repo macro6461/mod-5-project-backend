@@ -41,6 +41,7 @@ class SponsorsController < ApplicationController
   end
 
   def delete
+    byebug
     @sponsor = Sponsor.find(params[:id])
     @sponsor.destroy
   end
@@ -53,10 +54,10 @@ class SponsorsController < ApplicationController
     end
   end
 
-  # private
-  #
-  # def sponsor_params
-  #   params.require(:sponsor).permit(:username, :age, :bio, :street, :city, :state, :zip, :password, :gender, :email)
-  # end
+  private
+
+  def sponsor_params
+    params.require(:sponsor).permit(:username, :password, :age, :bio, :street, :city, :state, :zip, :gender, :email)
+  end
 
 end
