@@ -4,7 +4,7 @@ class SponseeAuthController < ApplicationController
 # skip_before_action :authorized, only: [:create]
 
   def create
-    
+
     sponsee = Sponsee.find_by(username: params[:username])
     if sponsee && sponsee.authenticate(params[:password])
       #YOU ARE WHO YOU SAY YOU ARE

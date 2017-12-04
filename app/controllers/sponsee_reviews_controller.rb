@@ -26,7 +26,7 @@ class SponseeReviewsController < ApplicationController
   def update
   end
 
-  def delete
+  def destroy
     @sponsee_review = SponseeReview.find(params[:id])
     @sponsee_review.destroy
   end

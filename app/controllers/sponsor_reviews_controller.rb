@@ -28,8 +28,8 @@ class SponsorReviewsController < ApplicationController
   def update
   end
 
-  def delete
-    byebug
+  def destroy
+  
     @sponsor_review = SponsorReview.find(params[:id])
     @sponsor_review.destroy
   end
