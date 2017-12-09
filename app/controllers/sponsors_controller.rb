@@ -14,7 +14,8 @@ class SponsorsController < ApplicationController
   end
 
   def create
-    @sponsor = Sponsor.new(username: params[:username], password: params[:password], age: params[:age], bio: params[:bio], street: params[:street], city: params[:city], state: params[:state], zip: params[:zip], gender: params[:gender], email: params[:email])
+    byebug
+    @sponsor = Sponsor.new(sponsor_params)
     if @sponsor.save
       token = encode_token(sponsor_id: @sponsor.id)
       render json: {sponsor: @sponsor, jwt: token}
@@ -56,7 +57,7 @@ class SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit(:username, :age, :bio, :street, :city, :state, :zip, :password, :gender, :email)
+    params.permit(:username, :age, :bio, :street, :city, :state, :zip, :password, :gender, :email)
   end
 
 end

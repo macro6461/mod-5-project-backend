@@ -60,7 +60,7 @@ class SponseesController < ApplicationController
     private
 
     def sponsee_params
-      params.require(:sponsor).permit(:username, :password, :age, :bio, :street, :city, :state, :zip, :gender, :email)
+      params.permit(:username, :age, :bio, :street, :city, :state, :zip, :password, :gender, :email)
     end
 
 end
