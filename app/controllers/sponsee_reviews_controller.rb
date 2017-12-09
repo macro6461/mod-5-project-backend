@@ -15,7 +15,7 @@ class SponseeReviewsController < ApplicationController
   end
 
   def create
-    @sponsee_review = SponseeReview.new(sponsee_id: params[:sponsee_id], facility_id: params[:facility_id], rating: params[:rating], body: params[:body])
+    @sponsee_review = SponseeReview.new(sponsee_review_params)
     if @sponsee_review.save
       redirect_to @sponsee_review
     else
@@ -29,6 +29,12 @@ class SponseeReviewsController < ApplicationController
   def destroy
     @sponsee_review = SponseeReview.find(params[:id])
     @sponsee_review.destroy
+  end
+
+  private
+
+  def sponsee_review_params
+    params.require(:sponsee_review).permit(:sponsee_id, :facility_id, :rating, :body)
   end
 
 

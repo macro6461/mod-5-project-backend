@@ -17,7 +17,7 @@ class SponsorReviewsController < ApplicationController
 
   def create
 
-    @sponsor_review = SponsorReview.new(sponsor_id: params[:sponsor_id], facility_id: params[:facility_id], rating: params[:rating], body: params[:body])
+    @sponsor_review = SponsorReview.new(sponsor_review_params)
     if @sponsor_review.save
       render json: {sponsor_review: @sponsor_review}
     else
@@ -29,9 +29,15 @@ class SponsorReviewsController < ApplicationController
   end
 
   def destroy
-  
+
     @sponsor_review = SponsorReview.find(params[:id])
     @sponsor_review.destroy
+  end
+
+  private
+
+  def sponsor_review_params
+      params.require(:sponsor_review).permit(:sponsor_id, :facility_id, :rating, :body)
   end
 
 
